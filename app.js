@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
-
+import routes from "./routes";
 const app = express();
 
 app.use(helmet());
@@ -15,8 +15,8 @@ app.use(bodyParser.json()); // 서버가 json을 이해할 수 있음
 app.use(bodyParser.urlencoded({ extended: true })); // 서버가 urlencoded를 이해할 수 있음
 app.use(morgan("dev"));
 
-app.use("/", globalRouter);
-app.use("/user", userRouter); // use: 누군가 /use에 접속하면 userRouter의 라우터 전체를 사용
-app.use("/video", videoRouter);
+app.use("routes.home", globalRouter);
+app.use("routes.users", userRouter); // use: 누군가 /use에 접속하면 userRouter의 라우터 전체를 사용
+app.use("routes.videos", videoRouter);
 
 export default app;
