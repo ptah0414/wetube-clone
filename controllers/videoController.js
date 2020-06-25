@@ -10,7 +10,7 @@ export const search = (req, res) => {
   const {
     query: { term: searchingBy },
   } = req;
-  res.render("search", { pageTitle: "Search", searchingBy }); // searchingBy: searchingBy와 같음
+  res.render("search", { pageTitle: "Search", searchingBy, videos }); // searchingBy: searchingBy와 같음
 };
 
 export const upload = (req, res) =>
