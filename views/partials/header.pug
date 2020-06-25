@@ -3,6 +3,12 @@ header.header
         a(href=routes.home)
             i.fab.fa-youtube
     .header__column
+        form(action=routes.search, method="get")
+            //- 검색창에 입력 시 routes.search로 이동
+            //- 컨트롤러가 query에 접근하려면 method가 get이어야 함
+            input(type="text", placeholder="Search by term", name="term")
+            //- express가 term이라는 query(인자) 저장
+    .header__column
         u1
             li
                 a(href=routes.join) Join 
