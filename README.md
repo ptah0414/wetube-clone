@@ -5,8 +5,8 @@ cloning wetube with vanilla and nodeJS
 ## Pages:
 
 - [ ] Home
-- [ ] Join
-- [ ] Login
+- [x] Join
+- [x] Login
 - [x] Search
 - [ ] User Detail
 - [ ] Edit Profile
