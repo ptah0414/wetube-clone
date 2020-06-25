@@ -1,4 +1,9 @@
-export const home = (req, res) => res.render("home", { pageTitle: "Home" });
+import { videos } from "../db";
+
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videos }); // videos: videos와 같음
+  // Home 템플릿에 db.js의 videos 전달
+};
 
 export const search = (req, res) => {
   // const searchingBy = req.query.term; <- es6 이전의 방식
