@@ -1,8 +1,15 @@
 import routes from "../routes";
+import Video from "../models/Video";
 
-export const home = (req, res) => {
-  res.render("home", { pageTitle: "Home", videos }); // videos: videos와 같음
-  // Home 템플릿에 db.js의 videos 전달
+export const home = async (req, res) => {
+  try {
+    const videos = await Video.find({}); // finds all the videos on db
+    res.render("home", { pageTitle: "Home", videos }); // videos: videos와 같음
+    // Home 템플릿에 db.js의 videos 전달
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] });
+  }
 };
 
 export const search = (req, res) => {
