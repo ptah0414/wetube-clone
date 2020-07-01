@@ -16,12 +16,23 @@ export const home = async (req, res) => {
 
 // Search
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // const searchingBy = req.query.term; <- es6 이전의 방식
   const {
     query: { term: searchingBy },
   } = req;
-  res.render("search", { pageTitle: "Search", searchingBy }); // searchingBy: searchingBy와 같음
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" },
+      // 검색어와 완전히 동일한 결과값만을 찾을 필요 없음
+      // $options: "i": 대소문자 구분 하지 않음(i: insensitive)
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  res.render("search", { pageTitle: "Search", searchingBy, videos }); // searchingBy: searchingBy와 같음
+  // 어떤 비디오도 찾지 못하면 빈 배열로 render
 };
 
 // Upload
