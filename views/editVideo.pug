@@ -1,4 +1,11 @@
 extends layouts/main.pug
 
 block content
-    p Edit Video
+    .form-container
+        //- videoController.js의 getEditVideo에서 video 받음
+        form(action=routes.editVideo(video.id), method="post")
+        //- action: 서식 데이터(form data)를 서버로 보낼 때 해당 데이터가 도착할 URL
+            input(type="text", placeholder="Title", name="title", value=video.title)
+            textarea(name="description", placeholder="Description")=video.description
+            input(type="submit", value="Update Video")
+        a.form-container__link.form-container__link--delete(href=`/videos${routes.deleteVideo}`) Delete Video
