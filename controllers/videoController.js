@@ -23,12 +23,18 @@ export const search = (req, res) => {
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
   const {
-    body: { file, title, description }, // upload.pug의 form에서 전송한 data
+    body: { title, description }, // upload.pug의 form에서 전송한 data
+    file: { path },
   } = req;
-  // To Do: Upload and save video
-  res.redirect(routes.videoDetail(324393)); // dummy id
+  const newVideo = await Video.create({
+    // Video.js 모델에서 작성했던 변수 사용
+    fileUrl: path,
+    title,
+    description,
+  });
+  res.redirect(routes.videoDetail(newVideo.id)); // dummy id
 };
 
 export const videoDetail = (req, res) =>
