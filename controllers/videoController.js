@@ -1,9 +1,11 @@
 import routes from "../routes";
 import Video from "../models/Video";
 
+// Home
+
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}); // finds all the videos on db
+    const videos = await Video.find({}).sort({ _id: -1 }); // finds all the videos on db
     res.render("home", { pageTitle: "Home", videos }); // videos: videos와 같음
     // Home 템플릿에 db.js의 videos 전달
   } catch (error) {
@@ -12,13 +14,17 @@ export const home = async (req, res) => {
   }
 };
 
+// Search
+
 export const search = (req, res) => {
   // const searchingBy = req.query.term; <- es6 이전의 방식
   const {
     query: { term: searchingBy },
   } = req;
-  res.render("search", { pageTitle: "Search", searchingBy, videos }); // searchingBy: searchingBy와 같음
+  res.render("search", { pageTitle: "Search", searchingBy }); // searchingBy: searchingBy와 같음
 };
+
+// Upload
 
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
@@ -37,6 +43,8 @@ export const postUpload = async (req, res) => {
   res.redirect(routes.videoDetail(newVideo.id)); // dummy id
 };
 
+// Video Detail
+
 export const videoDetail = async (req, res) => {
   const {
     params: { id },
@@ -48,6 +56,8 @@ export const videoDetail = async (req, res) => {
     res.redirect(routes.home);
   }
 };
+
+// Edit Video
 
 export const getEditVideo = async (req, res) => {
   const {
@@ -74,12 +84,16 @@ export const postEditVideo = async (req, res) => {
   }
 };
 
+// Delete Video
+
 export const deleteVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
   try {
     await Video.findOneAndRemove({ _id: id });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect(routes.home);
 };
