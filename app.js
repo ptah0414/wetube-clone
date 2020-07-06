@@ -8,11 +8,13 @@ import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+
 const app = express();
 
 app.use(helmet());
 app.set("view engine", "pug");
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 // express.static(): 주어진 directory에서 file을 보내주는 미들웨어
 // /uploads로 접속하면 uploads라는 directory 안으로 들어감
 app.use(cookieParser());
