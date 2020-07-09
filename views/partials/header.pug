@@ -1,24 +1,22 @@
 header.header
-    .header__column
-        a(href=routes.home)
-            i.fab.fa-youtube
-    .header__column
-        form(action=routes.search, method="get")
-            //- 검색창에 입력 시 routes.search로 이동
-            //- 컨트롤러가 query에 접근하려면 method가 get이어야 함
-            input(type="text", placeholder="Search by term", name="term")
-            //- express가 term이라는 query(인자) 저장
-    .header__column
-        u1
-            if !user.isAuthenticated
-                li
-                    a(href=routes.join) Join 
-                li 
-                    a(href=routes.login) Log In
-            else
-                li
-                    a(href=`/videos${routes.upload}`) Upload
-                li 
-                    a(href=routes.userDetail(user.id)) Profile
-                li 
-                    a(href=routes.logout) Logout
+    .header__wrapper
+        .header__column
+            a(href=routes.home)
+                i.fab.fa-youtube
+        .header__column
+            form(action=routes.search, method="get")
+                input(type="text", placeholder="Search by term...", name="term")
+        .header__column
+            ul
+                if !user.isAuthenticated
+                    li
+                        a(href=routes.join) Join
+                    li
+                        a(href=routes.login) Log In
+                else 
+                    li
+                        a(href=`/videos${routes.upload}`) Upload
+                    li
+                        a(href=routes.userDetail(user.id)) Profile
+                    li
+                        a(href=routes.logout) Log Out
