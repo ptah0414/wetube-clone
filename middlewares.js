@@ -8,7 +8,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.routes = routes;
   res.locals.user = {
     // 존재하지 않는 가짜 정보
-    isAuthenticated: true,
+    isAuthenticated: false,
     id: 1,
   };
   next();
