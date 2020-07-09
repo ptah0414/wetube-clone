@@ -6,11 +6,11 @@ const multerVideo = multer({ dest: "uploads/videos/" }); // destination
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
-  res.locals.user = {
-    // 존재하지 않는 가짜 정보
-    isAuthenticated: false,
-    id: 1,
-  };
+  res.locals.user = req.user || {};
+  // user가 존재하지 않는다면 비어있는 object를 줌
+  // console.log(req.user) 하면
+  // { _id:  , name:  , email:  , _v:  } 출력
+
   next();
 };
 

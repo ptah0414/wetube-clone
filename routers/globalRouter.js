@@ -12,7 +12,7 @@ import {
 const globalRouter = express.Router(); // 라우터 생성
 
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin, postLogin); // postJoin에서 가입시키고 postLogin에서 로그인시킴
 
 globalRouter.get(routes.login, getLogin);
 globalRouter.post(routes.login, postLogin);
