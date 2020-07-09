@@ -10,8 +10,26 @@ export const localsMiddleware = (req, res, next) => {
   // user가 존재하지 않는다면 null을 줌
   // console.log(req.user) 하면
   // { _id:  , name:  , email:  , _v:  } 출력
-  console.log(req.user);
   next();
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    // if the user is logged in
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+// 로그인 된 사용자 전용
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    // if the user is logged in
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
 };
 
 export const uploadVideo = multerVideo.single("videoFile");
